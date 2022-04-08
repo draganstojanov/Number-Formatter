@@ -7,12 +7,36 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/formattedNumberLabel"
-        android:layout_width="0dp"
+        android:id="@+id/inputLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Formatted number:"
-        android:layout_marginHorizontal="8dp"
+        android:text="Your number"
+        android:layout_marginLeft="8dp"
+        android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="8dp"
+        android:paddingHorizontal="8dp"
+        android:maxLength="10"
+        android:hint="Enter number to be formatted..."
+        android:inputType="numberDecimal"
+        android:background="#dddddd"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/formattedNumber"
+        app:layout_constraintTop_toBottomOf="@id/inputLabel" />
+
+    <TextView
+        android:id="@+id/formattedNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Formatted number"
+        android:layout_marginRight="8dp"
+        android:textSize="12sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,60 +44,81 @@
         android:id="@+id/formattedNumber"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:textSize="32sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/purple_700"
-        android:text="123"
-        android:gravity="center"
-        android:layout_marginHorizontal="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:paddingHorizontal="8dp"
+        android:background="@color/purple_700"
+        android:textColor="@color/white"
+        android:gravity="end|center_vertical"
+        android:layout_marginRight="8dp"
+        app:layout_constraintLeft_toRightOf="@id/input"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/formattedNumberLabel" />
 
     <View
-        android:id="@+id/topDivide"
+        android:id="@+id/divider_1"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:background="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/formattedNumber" />
+        app:layout_constraintTop_toBottomOf="@id/input" />
 
-    <TextView
-        android:id="@+id/inputLabel"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Your number:"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/divider_1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topDivide" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fitsSystemWindows="true"
+        android:overScrollMode="never">
 
-    <EditText
-        android:id="@+id/input"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginHorizontal="8dp"
-        android:padding="8dp"
-        android:text="1.23"
-        android:hint="Enter number to be formatted..."
-        android:inputType="number"
-        android:background="#dddddd"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputLabel" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-<!--    <Button-->
-<!--        android:id="@+id/btn"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="24dp"-->
-<!--        android:text="Show"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/input" />-->
+            <TextView
+                android:id="@+id/zerosLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leading zeros"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <EditText
+                android:id="@+id/zerosInput"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:paddingHorizontal="8dp"
+                android:layout_marginRight="8dp"
+                android:maxLength="1"
+                android:hint="zeros"
+                android:inputType="number"
+                android:background="#bbbbbb"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/zerosFormattedNumber"
+                app:layout_constraintTop_toBottomOf="@id/zerosLabel" />
+
+            <TextView
+                android:id="@+id/zerosFormattedNumber"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="8dp"
+                android:background="@color/purple_500"
+                android:textColor="@color/white"
+                android:gravity="end|center_vertical"
+                app:layout_constraintLeft_toRightOf="@id/zerosInput"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/zerosLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

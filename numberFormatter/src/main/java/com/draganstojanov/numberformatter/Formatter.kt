@@ -8,15 +8,15 @@ import kotlin.math.roundToInt
 internal object Formatter {
 
  internal   fun formatter(
-        number: Number,
-        leadingZeros: Int = 0,
-        showDecimals: ShowDecimals = ShowDecimals.DEFAULT,
-        showIntIfZero: Boolean = true,
-        fixedDecimals: Int = 0,
-        maxDecimals: Int = 0
+     number: Number?,
+     leadingZeros: Int = 0,
+     showDecimals: ShowDecimals = ShowDecimals.DEFAULT,
+     showIntIfZero: Boolean = true,
+     fixedDecimals: Int = 0,
+     maxDecimals: Int = 0
     ): String {
 
-        val intPart = number.toInt()
+        val intPart = number?.toInt()
         val decPart = if (number.toString().contains(".")) number.toString().substringAfter(".").toInt() else NO_DECIMAL_VALUE
 
         var intString = intPart.toString()
