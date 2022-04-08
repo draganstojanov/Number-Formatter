@@ -22,7 +22,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setup() {
 
-        val  nf= NumberFormatter(leadingZeros = 3)
+        binding.input.requestFocus()
+
+        //*********************
+
+        val nf = NumberFormatter(leadingZeros = 3)
 
         Log.d("TEST+CLAZZ", nf.formatted(2.34))
 
@@ -57,7 +61,6 @@ class MainActivity : AppCompatActivity() {
         Log.d("TEST", 0.123.fixedNumberOfDecimals(9))
 
 
-
 //        Log.d("TEST", 1.23.alwaysShowDecimals(true))
 //        Log.d("TEST", 1.23.alwaysShowDecimals(false))
 //
@@ -68,15 +71,14 @@ class MainActivity : AppCompatActivity() {
 //        Log.d("TEST", 1.alwaysShowDecimalsInclInteger(false))
 
 
-        binding.btn.setOnClickListener {
-            val n = binding.input.text.toString()
-//            val f =n.addLeadingZeros(4)
-//            binding.result.text=f
+//        binding.btn.setOnClickListener {
+//            val n = binding.input.text.toString()
+////            val f =n.addLeadingZeros(4)
+////            binding.result.text=f
+//
+//
+//
+//        }
 
-
-
-        }
-
-12
     }
 }

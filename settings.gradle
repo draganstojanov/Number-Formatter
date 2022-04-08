@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "NumberFormatter"
-include ':app'
+include ':example'
 include ':numberFormatter'
