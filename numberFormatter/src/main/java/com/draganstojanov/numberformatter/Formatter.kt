@@ -7,13 +7,15 @@ import kotlin.math.roundToInt
 
 internal object Formatter {
 
- internal   fun formatter(
-     number: Number?,
-     leadingZeros: Int = 0,
-     showDecimals: ShowDecimals = ShowDecimals.DEFAULT,
-     showIntIfZero: Boolean = true,
-     fixedDecimals: Int = 0,
-     maxDecimals: Int = 0
+    internal fun formatter(
+        number: Number?,
+        leadingZeros: Int = 0,
+        showDecimals: ShowDecimals = ShowDecimals.DEFAULT,
+        showIntIfZero: Boolean = true,
+        fixedDecimals: Int = 0,
+        maxDecimals: Int = 0,
+        calculateFixedDecimals: Boolean = false,
+        calculateMaxDecimals: Boolean = false
     ): String {
 
         val intPart = number?.toInt()
@@ -35,15 +37,39 @@ internal object Formatter {
             }
         }
 
-        if ((fixedDecimals > 0 || maxDecimals > 0) && decString.isNotEmpty()) {//fixedNumberOfDecimals,maxNumberOfDecimals
-            val pow = decPart / 10.0.pow(decPart.toString().length - fixedDecimals)
 
-            decString = ".${pow.roundToInt()}".take(fixedDecimals + 1)
+        var fix = ""
+        if (fixedDecimals > 0 && decString.isNotEmpty()) {
+            val d = decPart / 10.0.pow(decPart.toString().length - fixedDecimals)
+            fix = ".${d.roundToInt()}".take(fixedDecimals + 1)
+        }
 
-            if (fixedDecimals > 0) {
-                decString = "${decString}${stringOfZeros(fixedDecimals)}".take(fixedDecimals + 1)
+        var max = ""
+        if (maxDecimals > 0 && decString.isNotEmpty()) {
+            var pow = 10.0.pow(decPart.toString().length - maxDecimals)
+            if (pow < 1) {
+                pow = 1.0
+            }
+            val d = decPart / pow
+            max = ".${d.roundToInt()}".take(maxDecimals + 1)
+        }
+
+        if (calculateFixedDecimals) {
+            decString = fix
+        } else {
+            if (calculateMaxDecimals) {
+                decString = max
+            } else {
+                if (fixedDecimals > 0) {
+                    decString = fix
+                } else {
+                    if (maxDecimals > 0) {
+                        decString = max
+                    }
+                }
             }
         }
+
 
         if (!showIntIfZero && decString.isNotEmpty()) {//showIntegerPartIfZero
             if (intPart == 0) {
@@ -57,8 +83,6 @@ internal object Formatter {
                     intString = "${stringOfZeros(leadingZeros)}${intString}".takeLast(leadingZeros)
                 }
             }
-
-
         }
 
 //    if (leadingZeros > 1) {// addLeadingZeros

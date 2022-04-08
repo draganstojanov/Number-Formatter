@@ -5,10 +5,10 @@ import com.draganstojanov.numberformatter.util.ShowDecimals
 
 class NumberFormatter(
     var leadingZeros: Int = 0,
-    val showDecimals: ShowDecimals = ShowDecimals.DEFAULT,
-    val showIntIfZero: Boolean = true,
-    val fixedDecimals: Int = 0,
-    val maxDecimals: Int = 0
+    var showDecimals: ShowDecimals = ShowDecimals.DEFAULT,
+    var showIntIfZero: Boolean = true,
+    var fixedDecimals: Int = 0,
+    var maxDecimals: Int = 0
 ) {
 
     fun getFormatted(number: Number?): String = Formatter.formatter(
