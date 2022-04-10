@@ -4,7 +4,7 @@ import com.draganstojanov.numberformatter.Formatter.formatter
 import com.draganstojanov.numberformatter.util.ShowDecimals
 
 
-fun Int.addSingleLeadingZero(): String = formatter(this, leadingZeros = this.toString().length + 1)
+fun Int.addSingleLeadingZero(): String = if (this.toString().length <= 2) "0${this}".takeLast(2) else this.toString()
 
 fun Number.addLeadingZeros(leadingZeros: Int): String = formatter(this, leadingZeros = leadingZeros)
 
