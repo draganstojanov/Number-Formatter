@@ -48,7 +48,7 @@ Examples:
 | 12345678 | 3 |12345678|
 
 
-	NUMBER.addLeadingZeros(showDecimals)
+	NUMBER.showDecimals(showDecimals)
 showDecimals ->ShowDecimals is ShowDecimals enum.  
 
 
