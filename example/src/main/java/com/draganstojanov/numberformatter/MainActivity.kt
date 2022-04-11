@@ -5,7 +5,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.draganstojanov.numberformatter.databinding.ActivityMainBinding
@@ -22,8 +21,8 @@ class MainActivity : AppCompatActivity() {
     var mLeadingZeros: Int = 0
     var mShowDecimals: ShowDecimals = ShowDecimals.DEFAULT
     var mShowIntIfZero: Boolean = true
-    var mFixedDecimals: Int = 0
     var mMaxDecimals: Int = 0
+    var mAddZerosAtEnd: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,24 +91,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.showIntSwitch.setOnCheckedChangeListener { _, state ->
+        binding.showIntCheckbox.setOnCheckedChangeListener { _, state ->
             mShowIntIfZero = state
             runFormatter()
-        }
-
-        with(binding.fixedSpinner) {
-            adapter = numbersAdapter
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    mFixedDecimals = p2
-                    runFormatter()
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                    mFixedDecimals = 0
-                    runFormatter()
-                }
-            }
         }
 
         with(binding.maxSpinner) {
@@ -127,7 +111,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.resetBtn.setOnClickListener{ setInitialValues()}
+        binding.maxZerosCheckbox.setOnCheckedChangeListener { _, state ->
+            mAddZerosAtEnd = state
+            runFormatter()
+        }
+
+        binding.resetBtn.setOnClickListener { setInitialValues() }
 
     }
 
@@ -137,15 +126,15 @@ class MainActivity : AppCompatActivity() {
             leadingZeros = mLeadingZeros
             showDecimals = mShowDecimals
             showIntIfZero = mShowIntIfZero
-            fixedDecimals = mFixedDecimals
             maxDecimals = mMaxDecimals
+            addZerosAtEnd = mAddZerosAtEnd
         }
 
         binding.zerosFormattedNumber.text = number?.addLeadingZeros(mLeadingZeros)
         binding.showFormattedNumber.text = number?.showDecimals(mShowDecimals)
         binding.showIntFormattedNumber.text = number?.showIntegerPartIfZero(mShowIntIfZero)
-        binding.fixedFormattedNumber.text = number?.fixedNumberOfDecimals(mFixedDecimals)
-        binding.maxFormattedNumber.text = number?.maxNumberOfDecimals(mMaxDecimals)
+        binding.maxFormattedNumber.text = number?.maxDecimals(mMaxDecimals, mAddZerosAtEnd)
+
 
         if (number is Int)
             binding.singleZeroFormattedNumber.text = (number as Int).addSingleLeadingZero()
@@ -161,15 +150,15 @@ class MainActivity : AppCompatActivity() {
         mLeadingZeros = 0
         mShowDecimals = ShowDecimals.DEFAULT
         mShowIntIfZero = true
-        mFixedDecimals = 0
         mMaxDecimals = 0
+        mAddZerosAtEnd = false
 
         numberFormatter = NumberFormatter(
             leadingZeros = 0,
             showDecimals = ShowDecimals.DEFAULT,
             showIntIfZero = true,
-            fixedDecimals = 0,
-            maxDecimals = 0
+            maxDecimals = 0,
+            addZerosAtEnd = false
         )
 
         with(binding.input) {
@@ -178,9 +167,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.zerosSpinner.setSelection(0)
         binding.showSpinner.setSelection(0)
-        binding.showIntSwitch.isChecked = true
-        binding.fixedSpinner.setSelection(0)
+        binding.showIntCheckbox.isChecked = true
         binding.maxSpinner.setSelection(0)
+        binding.maxZerosCheckbox.isChecked = false
 
         runFormatter()
     }

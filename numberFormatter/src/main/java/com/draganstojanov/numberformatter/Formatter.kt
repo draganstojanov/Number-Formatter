@@ -12,10 +12,8 @@ internal object Formatter {
         leadingZeros: Int = 0,
         showDecimals: ShowDecimals = ShowDecimals.DEFAULT,
         showIntIfZero: Boolean = true,
-        fixedDecimals: Int = 0,
         maxDecimals: Int = 0,
-        calculateFixedDecimals: Boolean = false,
-        calculateMaxDecimals: Boolean = false
+        addZerosAtEnd: Boolean = false
     ): String {
 
         val intPart = number?.toInt()
@@ -37,39 +35,14 @@ internal object Formatter {
             }
         }
 
-
-        var fix = ""
-        if (fixedDecimals > 0 && decString.isNotEmpty()) {
-            val d = decPart / 10.0.pow(decPart.toString().length - fixedDecimals)
-            fix = ".${d.roundToInt()}".take(fixedDecimals + 1)
-        }
-
-        var max = ""
         if (maxDecimals > 0 && decString.isNotEmpty()) {
             var pow = 10.0.pow(decPart.toString().length - maxDecimals)
-            if (pow < 1) {
+            if (!addZerosAtEnd && pow < 1) {
                 pow = 1.0
             }
             val d = decPart / pow
-            max = ".${d.roundToInt()}".take(maxDecimals + 1)
+            decString = ".${d.roundToInt()}".take(maxDecimals + 1)
         }
-
-        if (calculateFixedDecimals) {
-            decString = fix
-        } else {
-            if (calculateMaxDecimals) {
-                decString = max
-            } else {
-                if (fixedDecimals > 0) {
-                    decString = fix
-                } else {
-                    if (maxDecimals > 0) {
-                        decString = max
-                    }
-                }
-            }
-        }
-
 
         if (!showIntIfZero && decString.isNotEmpty()) {//showIntegerPartIfZero
             if (intPart == 0) {
@@ -84,14 +57,6 @@ internal object Formatter {
                 }
             }
         }
-
-//    if (leadingZeros > 1) {// addLeadingZeros
-//        if (intPart.toString().length > zeros && intString.isNotEmpty()) {
-//            throw StringIndexOutOfBoundsException("Integer part of number has more figures than number of zeros")//todo ???
-//        }
-//        intString = "${stringOfZeros(leadingZeros)}${intString}".takeLast(leadingZeros)
-//
-//    }
 
         return "${intString}${decString}"
     }
