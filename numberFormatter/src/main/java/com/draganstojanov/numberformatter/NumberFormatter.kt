@@ -7,8 +7,8 @@ class NumberFormatter(
     var leadingZeros: Int = 0,
     var showDecimals: ShowDecimals = ShowDecimals.DEFAULT,
     var showIntIfZero: Boolean = true,
-    var fixedDecimals: Int = 0,
-    var maxDecimals: Int = 0
+    var maxDecimals: Int = 0,
+    var addZerosAtEnd: Boolean = false
 ) {
 
     fun getFormatted(number: Number?): String = Formatter.formatter(
@@ -16,8 +16,8 @@ class NumberFormatter(
         leadingZeros = leadingZeros,
         showDecimals = showDecimals,
         showIntIfZero = showIntIfZero,
-        fixedDecimals = fixedDecimals,
-        maxDecimals = maxDecimals
+        maxDecimals = maxDecimals,
+        addZerosAtEnd = addZerosAtEnd
     )
 
 }

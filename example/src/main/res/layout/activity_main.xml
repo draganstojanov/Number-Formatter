@@ -163,15 +163,14 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/showSpinner" />
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/showIntSwitch"
+            <CheckBox
+                android:id="@+id/showIntCheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:layout_marginRight="8dp"
-                android:foregroundGravity="left"
-                android:paddingHorizontal="8dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:buttonTint="@color/teal_700"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/showIntFormattedNumber"
                 app:layout_constraintTop_toBottomOf="@id/showIntLabel" />
 
             <TextView
@@ -189,42 +188,6 @@
                 app:layout_constraintTop_toBottomOf="@id/showIntLabel" />
 
             <TextView
-                android:id="@+id/fixedLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="fixedNumberOfDecimals"
-                android:textColor="@color/teal_700"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/showIntSwitch" />
-
-            <Spinner
-                android:id="@+id/fixedSpinner"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:layout_marginRight="8dp"
-                android:background="#bbbbbb"
-                android:paddingHorizontal="8dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/fixedFormattedNumber"
-                app:layout_constraintTop_toBottomOf="@id/fixedLabel" />
-
-            <TextView
-                android:id="@+id/fixedFormattedNumber"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:background="@color/purple_500"
-                android:gravity="end|center_vertical"
-                android:paddingHorizontal="8dp"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toRightOf="@id/fixedSpinner"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fixedLabel" />
-
-            <TextView
                 android:id="@+id/maxLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -233,7 +196,7 @@
                 android:textColor="@color/teal_700"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fixedSpinner" />
+                app:layout_constraintTop_toBottomOf="@id/showIntCheckbox" />
 
             <Spinner
                 android:id="@+id/maxSpinner"
@@ -247,6 +210,31 @@
                 app:layout_constraintTop_toBottomOf="@id/maxLabel" />
 
             <TextView
+                android:id="@+id/maxAddZeroDescription"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:background="#bbbbbb"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="8dp"
+                android:text="Add zeros at end"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/maxFormattedNumber"
+                app:layout_constraintTop_toBottomOf="@id/maxSpinner" />
+
+            <CheckBox
+                android:id="@+id/maxZerosCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:buttonTint="@color/teal_700"
+                app:layout_constraintRight_toRightOf="@id/maxAddZeroDescription"
+                app:layout_constraintTop_toTopOf="@id/maxAddZeroDescription"
+                app:layout_constraintBottom_toBottomOf="@id/maxAddZeroDescription" />
+
+            <TextView
                 android:id="@+id/maxFormattedNumber"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
@@ -258,7 +246,8 @@
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@id/maxSpinner"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/maxLabel" />
+                app:layout_constraintTop_toBottomOf="@id/maxLabel"
+                app:layout_constraintBottom_toBottomOf="@id/maxAddZeroDescription" />
 
             <TextView
                 android:id="@+id/singleZeroLabel"
@@ -269,7 +258,7 @@
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/maxSpinner" />
+                app:layout_constraintTop_toBottomOf="@id/maxAddZeroDescription" />
 
             <TextView
                 android:id="@+id/singleZeroDescription"
@@ -298,17 +287,17 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/singleZeroLabel" />
 
-                <Button
-                    android:id="@+id/resetBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:layout_marginTop="24dp"
-                    android:text="Reset"
-                    android:backgroundTint="@color/teal_700"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/singleZeroDescription"/>
+            <Button
+                android:id="@+id/resetBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginTop="24dp"
+                android:text="Reset"
+                android:backgroundTint="@color/teal_700"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/singleZeroDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
