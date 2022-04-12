@@ -1,4 +1,4 @@
-# number-formatter-ktx
+# number-formatter
 
 [![](https://jitpack.io/v/draganstojanov/number-formatter-ktx.svg)](https://jitpack.io/#draganstojanov/number-formatter-ktx)
 
@@ -44,7 +44,7 @@ Examples:
 | Number| noOfFigures |Result |
 | -------------: | -------------: |-------------: |
 | 1 | 2 |01|
-| 2.3 | 4 |02.3|
+| 2.3 | 4 |0002.3|
 | 12345678 | 3 |12345678|
 
 
