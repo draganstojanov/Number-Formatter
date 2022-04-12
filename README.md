@@ -26,7 +26,7 @@ In your app/build.gradle:
 
 	dependencies {
 	    ...
-	     implementation 'com.github.draganstojanov:number-formatter-ktx:0.1.0'
+	     implementation 'com.github.draganstojanov:Number-Formatter:0.1.1'
 	    ...
 	}
 
