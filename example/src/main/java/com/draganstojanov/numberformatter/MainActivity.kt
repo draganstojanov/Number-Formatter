@@ -153,13 +153,7 @@ class MainActivity : AppCompatActivity() {
         mMaxDecimals = 0
         mAddZerosAtEnd = false
 
-        numberFormatter = NumberFormatter(
-            leadingZeros = 0,
-            showDecimals = ShowDecimals.DEFAULT,
-            showIntIfZero = true,
-            maxDecimals = 0,
-            addZerosAtEnd = false
-        )
+        numberFormatter = NumberFormatter()
 
         with(binding.input) {
             requestFocus()
