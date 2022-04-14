@@ -21,35 +21,35 @@
         android:layout_height="48dp"
         android:layout_marginHorizontal="8dp"
         android:background="#dddddd"
-        android:hint="Enter number to be formatted..."
+        android:hint="Enter number..."
         android:inputType="numberDecimal"
         android:maxLength="10"
         android:paddingHorizontal="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/formattedNumber"
-        app:layout_constraintTop_toBottomOf="@id/inputLabel" />
+        app:layout_constraintTop_toBottomOf="@id/inputLabel"
+        app:layout_constraintWidth_percent=".5" />
 
     <TextView
         android:id="@+id/formattedNumberLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
         android:text="Formatted number"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input" />
 
     <TextView
         android:id="@+id/formattedNumber"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginHorizontal="8dp"
         android:background="@color/purple_700"
         android:gravity="end|center_vertical"
         android:paddingHorizontal="8dp"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@id/input"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/formattedNumberLabel" />
 
@@ -61,7 +61,7 @@
         android:background="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input" />
+        app:layout_constraintTop_toBottomOf="@id/formattedNumber" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv"
@@ -96,8 +96,8 @@
                 android:layout_height="32dp"
                 android:layout_marginRight="8dp"
                 android:background="#bbbbbb"
-                android:paddingHorizontal="8dp"
                 android:focusable="true"
+                android:paddingHorizontal="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/zerosFormattedNumber"
                 app:layout_constraintTop_toBottomOf="@id/zerosLabel" />
@@ -167,9 +167,9 @@
                 android:id="@+id/showIntCheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
+                android:buttonTint="@color/teal_700"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
-                android:buttonTint="@color/teal_700"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/showIntLabel" />
 
@@ -213,8 +213,8 @@
                 android:id="@+id/maxAddZeroDescription"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
                 android:background="#bbbbbb"
                 android:gravity="center_vertical"
                 android:paddingHorizontal="8dp"
@@ -227,12 +227,12 @@
                 android:id="@+id/maxZerosCheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
+                android:buttonTint="@color/teal_700"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
-                android:buttonTint="@color/teal_700"
+                app:layout_constraintBottom_toBottomOf="@id/maxAddZeroDescription"
                 app:layout_constraintRight_toRightOf="@id/maxAddZeroDescription"
-                app:layout_constraintTop_toTopOf="@id/maxAddZeroDescription"
-                app:layout_constraintBottom_toBottomOf="@id/maxAddZeroDescription" />
+                app:layout_constraintTop_toTopOf="@id/maxAddZeroDescription" />
 
             <TextView
                 android:id="@+id/maxFormattedNumber"
@@ -244,19 +244,19 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/maxAddZeroDescription"
                 app:layout_constraintLeft_toRightOf="@id/maxSpinner"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/maxLabel"
-                app:layout_constraintBottom_toBottomOf="@id/maxAddZeroDescription" />
+                app:layout_constraintTop_toBottomOf="@id/maxLabel" />
 
             <TextView
                 android:id="@+id/singleZeroLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="addSingleLeadingZero"
                 android:textColor="@color/teal_700"
                 android:textStyle="bold"
-                android:layout_marginTop="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/maxAddZeroDescription" />
 
@@ -291,10 +291,10 @@
                 android:id="@+id/resetBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
                 android:layout_marginTop="24dp"
-                android:text="Reset"
                 android:backgroundTint="@color/teal_700"
+                android:padding="8dp"
+                android:text="Reset"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/singleZeroDescription" />

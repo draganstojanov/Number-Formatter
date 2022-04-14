@@ -1,0 +1,3 @@
+package com.draganstojanov.numberformatter.util
+
+enum class DecimalsMode { DEFAULT, ALWAYS, ALWAYS_INCLUDING_INTEGERS, IF_CONTAINS }

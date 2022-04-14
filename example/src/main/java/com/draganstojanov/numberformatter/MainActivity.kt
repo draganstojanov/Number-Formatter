@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.draganstojanov.numberformatter.databinding.ActivityMainBinding
 import com.draganstojanov.numberformatter.ext.*
-import com.draganstojanov.numberformatter.util.ShowDecimals
+import com.draganstojanov.numberformatter.util.DecimalsMode
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var numberFormatter: NumberFormatter
 
     private var number: Number? = 0
-    var mLeadingZeros: Int = 0
-    var mShowDecimals: ShowDecimals = ShowDecimals.DEFAULT
+    var mDigits: Int = 0
+    var mDecimalsMode: DecimalsMode = DecimalsMode.DEFAULT
     var mShowIntIfZero: Boolean = true
     var mMaxDecimals: Int = 0
     var mAddZerosAtEnd: Boolean = false
@@ -37,11 +37,13 @@ class MainActivity : AppCompatActivity() {
 
         with(binding.input) {
             doOnTextChanged { text, _, _, _ ->
-                number = if (!text.isNullOrEmpty())
+
+                val txt = if (text.toString() == ".") ".0" else text.toString()
+                number = if (txt.isNotEmpty())
                     try {
-                        text.toString().toInt()
+                        txt.toInt()
                     } catch (e: NumberFormatException) {
-                        text.toString().toFloat()
+                        txt.toFloat()
                     } else 0
                 runFormatter()
             }
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         val numbersAdapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
-            arrayOf(0, 1, 2, 3, 4, 5, 6)
+            arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8)
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
@@ -59,12 +61,12 @@ class MainActivity : AppCompatActivity() {
             adapter = numbersAdapter
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    mLeadingZeros = p2
+                    mDigits = p2
                     runFormatter()
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    mLeadingZeros = 0
+                    mDigits = 0
                     runFormatter()
                 }
             }
@@ -80,12 +82,12 @@ class MainActivity : AppCompatActivity() {
             }
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    mShowDecimals = ShowDecimals.values()[p2]
+                    mDecimalsMode = DecimalsMode.values()[p2]
                     runFormatter()
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    mShowDecimals = ShowDecimals.DEFAULT
+                    mDecimalsMode = DecimalsMode.DEFAULT
                     runFormatter()
                 }
             }
@@ -123,15 +125,15 @@ class MainActivity : AppCompatActivity() {
     private fun runFormatter() {
 
         numberFormatter.apply {
-            leadingZeros = mLeadingZeros
-            showDecimals = mShowDecimals
+            digits = mDigits
+            decimalsMode = mDecimalsMode
             showIntIfZero = mShowIntIfZero
             maxDecimals = mMaxDecimals
             addZerosAtEnd = mAddZerosAtEnd
         }
 
-        binding.zerosFormattedNumber.text = number?.addLeadingZeros(mLeadingZeros)
-        binding.showFormattedNumber.text = number?.showDecimals(mShowDecimals)
+        binding.zerosFormattedNumber.text = number?.addLeadingZeros(mDigits)
+        binding.showFormattedNumber.text = number?.decimalsDisplayMode(mDecimalsMode)
         binding.showIntFormattedNumber.text = number?.showIntegerPartIfZero(mShowIntIfZero)
         binding.maxFormattedNumber.text = number?.maxDecimals(mMaxDecimals, mAddZerosAtEnd)
 
@@ -147,8 +149,8 @@ class MainActivity : AppCompatActivity() {
 
         hideKeyboard()
 
-        mLeadingZeros = 0
-        mShowDecimals = ShowDecimals.DEFAULT
+        mDigits = 0
+        mDecimalsMode = DecimalsMode.DEFAULT
         mShowIntIfZero = true
         mMaxDecimals = 0
         mAddZerosAtEnd = false
@@ -157,7 +159,7 @@ class MainActivity : AppCompatActivity() {
 
         with(binding.input) {
             requestFocus()
-            setText("0")
+            setText("")
         }
         binding.zerosSpinner.setSelection(0)
         binding.showSpinner.setSelection(0)

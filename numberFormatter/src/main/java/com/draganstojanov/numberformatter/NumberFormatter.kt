@@ -1,11 +1,11 @@
 package com.draganstojanov.numberformatter
 
-import com.draganstojanov.numberformatter.util.ShowDecimals
+import com.draganstojanov.numberformatter.util.DecimalsMode
 
 
 class NumberFormatter(
-    var leadingZeros: Int = 0,
-    var showDecimals: ShowDecimals = ShowDecimals.DEFAULT,
+    var digits: Int = 0,
+    var decimalsMode: DecimalsMode = DecimalsMode.DEFAULT,
     var showIntIfZero: Boolean = true,
     var maxDecimals: Int = 0,
     var addZerosAtEnd: Boolean = false
@@ -13,8 +13,8 @@ class NumberFormatter(
 
     fun getFormatted(number: Number?): String = Formatter.formatter(
         number = number,
-        leadingZeros = leadingZeros,
-        showDecimals = showDecimals,
+        digits = digits,
+        decimalsMode = decimalsMode,
         showIntIfZero = showIntIfZero,
         maxDecimals = maxDecimals,
         addZerosAtEnd = addZerosAtEnd
