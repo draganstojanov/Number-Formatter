@@ -8,7 +8,7 @@ fun Int.addSingleLeadingZero(): String {
     return if (this in 0..9) {
         "0${this}".takeLast(2)
     } else {
-        Log.e("NumberFormatter", "maxDecimals - Max no of decimals is 8")
+        Log.e("NumberFormatter", "addSingleLeadingZero - number must be 0 <= number <= 9")
         this.toString()
     }
 }
