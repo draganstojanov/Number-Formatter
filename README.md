@@ -1,11 +1,6 @@
 # number-formatter
 
-[![](https://jitpack.io/v/draganstojanov/number-formatter-ktx.svg)](https://jitpack.io/#draganstojanov/number-formatter-ktx)
-
-
-## README is under construction
-
-  
+[![](https://jitpack.io/v/draganstojanov/Number-Formatter.svg)](https://jitpack.io/#draganstojanov/Number-Formatter)
 
 
 A simple Android Kotlin library to help you format (mostly decimal) numbers.
@@ -139,7 +134,3 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-
-## README is under construction
-
-	
