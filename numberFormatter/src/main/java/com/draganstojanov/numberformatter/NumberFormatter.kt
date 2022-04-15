@@ -2,7 +2,6 @@ package com.draganstojanov.numberformatter
 
 import com.draganstojanov.numberformatter.util.DecimalsMode
 
-
 class NumberFormatter(
     var digits: Int = 0,
     var decimalsMode: DecimalsMode = DecimalsMode.DEFAULT,
