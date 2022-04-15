@@ -33,8 +33,6 @@ In your app/build.gradle:
 
 # Usage
 
-There are two ways:
-
 ## Kotlin extensions
 
 	NUMBER.addLeadingZeros(noOfDigits)
@@ -89,6 +87,34 @@ addZerosAtEnd -> If NUMBER contains less decimals than maxDecimals, it fills mis
 | 1.23 |6|false|1.23|
 
 <br/><br/>
+
+	INTEGER.addSingleLeadingZero()
+ Suitable for displaying dates and times. Returns a value with zero as the first character if the value is 0 <= INTEGER <= 9.
+ 
+ | Number |Result |
+| -------------: | -------------: |
+| 1 | 01 |
+| 12 | 12 |
+
+<br/><br/>
+
+
+## Batch formatting using NumberFormatter class instance
+
+	fun formatNumber(number:Float):String{
+        
+      	val numberFormatter:NumberFormatter = NumberFormatter()
+
+        	numberFormatter.apply {
+            		digits = 4
+            		decimalsMode = DecimalsMode.IF_CONTAINS
+            		showIntIfZero = true
+            		maxDecimals = 4
+            		addZerosAtEnd = true }
+
+        	return numberFormatter.getFormatted(number)
+    }
+
 
 
 ## README is under construction
