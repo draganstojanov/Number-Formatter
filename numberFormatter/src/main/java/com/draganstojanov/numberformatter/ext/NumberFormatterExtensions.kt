@@ -1,9 +1,17 @@
 package com.draganstojanov.numberformatter.ext
 
+import android.util.Log
 import com.draganstojanov.numberformatter.Formatter.formatter
 import com.draganstojanov.numberformatter.util.DecimalsMode
 
-fun Int.addSingleLeadingZero(): String = if (this in 0..9) "0${this}".takeLast(2) else this.toString()
+fun Int.addSingleLeadingZero(): String {
+    return if (this in 0..9) {
+        "0${this}".takeLast(2)
+    } else {
+        Log.e("NumberFormatter", "maxDecimals - Max no of decimals is 8")
+        this.toString()
+    }
+}
 
 /**
  * [digits] = no of digits in integer part of number
@@ -20,8 +28,6 @@ fun Number.addLeadingZeros(digits: Int): String = formatter(this, digits = digit
  * values:
  *
  * DEFAULT
- *
- * ALWAYS
  *
  * ALWAYS_INCLUDING_INTEGERS
  *
