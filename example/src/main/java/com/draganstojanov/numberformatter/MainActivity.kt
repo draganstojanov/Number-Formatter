@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             adapter = ArrayAdapter(
                 this@MainActivity,
                 android.R.layout.simple_spinner_item,
-                arrayOf("DEFAULT", "ALWAYS", "ALWAYS_INCLUDING_INTEGERS", "IF_CONTAINS")
+                arrayOf("DEFAULT", "ALWAYS_INCLUDING_INTEGERS", "IF_CONTAINS")
             ).also { adapter ->
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             }
@@ -137,7 +137,6 @@ class MainActivity : AppCompatActivity() {
         binding.showIntFormattedNumber.text = number?.showIntegerPartIfZero(mShowIntIfZero)
         binding.maxFormattedNumber.text = number?.maxDecimals(mMaxDecimals, mAddZerosAtEnd)
 
-
         if (number is Int)
             binding.singleZeroFormattedNumber.text = (number as Int).addSingleLeadingZero()
         else binding.singleZeroFormattedNumber.text = ""
@@ -168,6 +167,7 @@ class MainActivity : AppCompatActivity() {
         binding.maxZerosCheckbox.isChecked = false
 
         runFormatter()
+
     }
 
     private fun hideKeyboard() {

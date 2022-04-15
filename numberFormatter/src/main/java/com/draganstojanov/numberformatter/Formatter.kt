@@ -25,8 +25,7 @@ internal object Formatter {
         /*decimalsDisplayMode*/
         var intString = intPart.toString()
         var decString: String = when (decimalsMode) {
-            DecimalsMode.DEFAULT,
-            DecimalsMode.ALWAYS -> if (decPart == NO_DECIMAL_VALUE) "" else ".${decPart}"
+            DecimalsMode.DEFAULT -> if (decPart == NO_DECIMAL_VALUE) "" else ".${decPart}"
             DecimalsMode.ALWAYS_INCLUDING_INTEGERS -> if (decPart == NO_DECIMAL_VALUE) ".0" else ".${decPart}"
             DecimalsMode.IF_CONTAINS -> if (decPart == NO_DECIMAL_VALUE || decPart == 0) "" else ".${decPart}"
         }
