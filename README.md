@@ -1,4 +1,4 @@
-# number-formatter
+# Number-Formatter
 
 [![](https://jitpack.io/v/draganstojanov/Number-Formatter.svg)](https://jitpack.io/#draganstojanov/Number-Formatter)
 
